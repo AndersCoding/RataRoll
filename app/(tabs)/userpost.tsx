@@ -10,9 +10,7 @@ export default function userPost() {
 
   return (
     <View className="flex-1 ">
-      <Text>Display of users workout</Text>
       <UserPost />
-     
     </View>
   );
 }

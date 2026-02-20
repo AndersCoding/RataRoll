@@ -71,16 +71,15 @@ export default function PostCard({
             <View className="absolute right-3 top-0 h-full w-8 bg-black rounded-sm" />
           </View>
         </View>
+        {post.isUserPost && onDelete && (
+          <Pressable
+            onPress={() => onDelete(post.id)}
+            className="bg-black px-3 py-2 rounded-full self-start"
+          >
+            <Text className="text-white">X</Text>
+          </Pressable>
+        )}
       </View>
-
-      {post.isUserPost && onDelete && (
-        <Pressable
-          onPress={() => onDelete(post.id)}
-          className="bg-red-500 mt-3 px-4 py-2 rounded-lg self-start"
-        >
-          <Text>Delete</Text>
-        </Pressable>
-      )}
 
       {/* Inner gray card */}
       <View className=" bg-gray-200  rounded-3xl p-4">
@@ -89,7 +88,11 @@ export default function PostCard({
           <Text className="text-2xl font-extrabold flex-1 pr-2">
             {post.title}
           </Text>
-          <Text className="text-lg">{post.date}</Text>
+          <Text className="text-lg">
+            {post.isUserPost
+              ? new Date(post.date).toLocaleDateString("no-NO")
+              : post.date}
+          </Text>
         </View>
 
         {/* Icons row */}

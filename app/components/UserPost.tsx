@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import yodaimage from "../images/apriloneil.webp";
 import { IUserPost } from "../interface/IUserPost";
 import {
   addUserPost,
   deleteUserPost,
   getUserPosts,
 } from "../storage/postsStorage";
-import yodaimage from "../images/apriloneil.webp";
 
 export default function UserPost() {
   const [userName, setUserName] = useState("");
@@ -34,7 +27,7 @@ export default function UserPost() {
 
   const handleUpload = async () => {
     const created: IUserPost = {
-      id: Date.now(),
+      id: Math.floor(Date.now() / 60000),
       user: userName.trim(),
       title: title.trim(),
       image: yodaimage,
@@ -50,7 +43,6 @@ export default function UserPost() {
 
     const next = await addUserPost(created);
     setUploadedPosts(next);
-
     setUserName("");
     setTitle("");
     setDescription("");
@@ -61,12 +53,11 @@ export default function UserPost() {
   const handleDelete = async (id: number) => {
     const next = await deleteUserPost(id);
     setUploadedPosts(next);
-  }
+  };
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
-        <Text>Fill inn fields!</Text>
+      <SafeAreaView className="mt-4">
         <TextInput
           placeholder="Username"
           placeholderTextColor={"gray"}
@@ -74,28 +65,34 @@ export default function UserPost() {
           value={userName}
           onChangeText={setUserName}
         />
+        <View className="flex-row justify-between w-[90%] gap-4 self-center">
+          <TextInput
+            placeholder="Title. Example: ''Destroyer of giants''"
+            placeholderTextColor={"gray"}
+            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+            value={title}
+            onChangeText={setTitle}
+          />
+          <TextInput
+            placeholder="Belt color"
+            placeholderTextColor={"gray"}
+            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+            value={beltColor}
+            autoCapitalize="characters"
+            onChangeText={setBeltColor}
+          />
+        </View>
+
         <TextInput
-          placeholder="Belt color"
-          placeholderTextColor={"gray"}
-          className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
-          value={beltColor}
-          autoCapitalize="characters"
-          onChangeText={setBeltColor}
-        />
-        <TextInput
+          editable
+          multiline
           placeholder="Description"
           placeholderTextColor={"gray"}
-          className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+          className="border-2 border-gray-300 rounded-lg p-2 mb-4 h-48 w-[90%] self-center"
           value={description}
           onChangeText={setDescription}
         />
-        <TextInput
-          placeholder="Title of workout"
-          placeholderTextColor={"gray"}
-          className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-80  bg-black-100"
-          value={title}
-          onChangeText={setTitle}
-        />
+
         <TextInput
           placeholder="Tags (comma separated)"
           placeholderTextColor={"gray"}
@@ -110,7 +107,10 @@ export default function UserPost() {
           <Text>Upload</Text>
         </Pressable>
       </SafeAreaView>
-      
+
+      <View>
+        {/*
+        <Text>List of uploads</Text>
         <FlatList
           data={uploadedPosts}
           keyExtractor={(item) => item.id.toString()}
@@ -140,10 +140,12 @@ export default function UserPost() {
           )}
           ListEmptyComponent={
             <Text className="text-center text-gray-500 mt-6">
-              Ingen uploads enda.
+              No uploads yet
             </Text>
           }
         />
+         */}
+      </View>
     </SafeAreaProvider>
   );
 }

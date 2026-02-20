@@ -6,7 +6,7 @@ const dummyData = [
     user: "Yoda",
     image: require("../images/yodaProfile.jpeg"),
     title: "First day",
-    date: "16/2-2026",
+    date: "16.2.2026",
     beltColor: "purple",
     description:
       "Today I started my bjj journey. I am so excited to learn new techniques and improve my skills on the mat. I can't wait to see how far I can go with this sport!",
@@ -17,7 +17,7 @@ const dummyData = [
     user: "April O'Neil",
     image: require("../images/apriloneil.webp"),
     title: "First week",
-    date: "16/2-2026",
+    date: "16.2.2026",
     beltColor: "blue",
     description:
       "I have been training for a week now and I am loving it! The techniques are challenging but rewarding, and the community is so supportive. I am already seeing improvements in my strength and flexibility.",
@@ -28,7 +28,7 @@ const dummyData = [
     user: "Paul Atreides",
     image: require("../images/paulatreides.webp"),
     title: "First month",
-    date: "16/2-2026",
+    date: "16.2.2026",
     beltColor: "brown",
 
     description:
