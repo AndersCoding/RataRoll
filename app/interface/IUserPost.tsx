@@ -5,6 +5,6 @@ export interface IUserPost {
     image: string;
     date: string;
     description: string;
-    beltColor: string; // "white", "blue", "purple", "brown", "black"
+    beltColor: string; 
     tags: string[];
 }

@@ -1,48 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { IUserPost } from "../interface/IUserPost";
 import { addUserPost, getUserPosts } from "../storage/postsStorage";
-
 
 export default function UserPost() {
   const [userName, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
+  const [beltColor, setBeltColor] = useState("");
 
-    const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
+  const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
 
-     useEffect(() => {
-       (async () => {
-         const saved = await getUserPosts();
-         setUploadedPosts(saved);
-       })();
-     }, []);
+  useEffect(() => {
+    (async () => {
+      const saved = await getUserPosts();
+      setUploadedPosts(saved);
+    })();
+  }, []);
 
-const handleUpload = async () => {
-  const created: IUserPost = {
-    id: Date.now(),
-    user: userName.trim(),
-    title: title.trim(),
-    image: "",
-    beltColor: "white",
-    date: new Date().toISOString(),
-    description: description.trim(),
-    tags: tags
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean),
+  const handleUpload = async () => {
+    const created: IUserPost = {
+      id: Date.now(),
+      user: userName.trim(),
+      title: title.trim(),
+      image: "",
+      beltColor: beltColor.trim().toLowerCase(),
+      date: new Date().toISOString(),
+      description: description.trim(),
+      tags: tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean),
+    };
+
+    const next = await addUserPost(created);
+    setUploadedPosts(next);
+
+    setUserName("");
+    setTitle("");
+    setDescription("");
+    setTags("");
+    setBeltColor("");
   };
-
-  const next = await addUserPost(created);
-  setUploadedPosts(next);
-
-  setUserName("");
-  setTitle("");
-  setDescription("");
-  setTags("");
-};
 
   return (
     <SafeAreaProvider>
@@ -54,6 +62,14 @@ const handleUpload = async () => {
           className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
           value={userName}
           onChangeText={setUserName}
+        />
+        <TextInput
+          placeholder="Belt color"
+          placeholderTextColor={"gray"}
+          className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+          value={beltColor}
+          autoCapitalize="characters"
+          onChangeText={setBeltColor}
         />
         <TextInput
           placeholder="Description"
@@ -113,5 +129,3 @@ const handleUpload = async () => {
     </SafeAreaProvider>
   );
 }
-
-
