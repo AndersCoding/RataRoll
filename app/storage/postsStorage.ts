@@ -18,3 +18,10 @@ export async function addUserPost(post: IUserPost): Promise<IUserPost[]> {
 export async function clearUserPosts() {
   await AsyncStorage.removeItem(KEY);
 }
+
+export async function deleteUserPost(id: number): Promise<IUserPost[]> {
+  const current = await getUserPosts();
+  const next = current.filter((p) => p.id !== id);
+  await AsyncStorage.setItem(KEY, JSON.stringify(next));
+  return next;
+}

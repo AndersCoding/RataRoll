@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { useFocusEffect } from "expo-router";
 import { IUserPost } from "../interface/IUserPost";
-import { getUserPosts } from "../storage/postsStorage";
+import { getUserPosts, deleteUserPost } from "../storage/postsStorage";
 import CombinedFeed from "../components/CombinedFeed";
 
 export default function Home() {
@@ -17,9 +17,14 @@ export default function Home() {
     }, [])
   );
 
+  const handleDelete = async (id: number) => {
+    const next = await deleteUserPost(id);
+    setUploadedPosts(next);
+  }
+
   return (
     <View className="flex-1 bg-white">
-      <CombinedFeed uploadedPosts={uploadedPosts} />
+      <CombinedFeed uploadedPosts={uploadedPosts} onDelete={handleDelete}/>
     </View>
   );
 }

@@ -6,8 +6,10 @@ import dummyData from "../data/dummyData";
 
 export default function CombinedFeed({
   uploadedPosts,
+  onDelete
 }: {
   uploadedPosts: IUserPost[];
+  onDelete: (id: number) => void;
 }) {
   const data: IUserPost[] = [...uploadedPosts, ...(dummyData as IUserPost[])];
 
@@ -16,7 +18,10 @@ export default function CombinedFeed({
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <PostCard post={item} />}
+        renderItem={({ item }) => 
+        <PostCard post={item} 
+        onDelete={item.isUserPost ? onDelete: undefined}
+        />}
         contentContainerStyle={{ paddingVertical: 12 }}
         showsVerticalScrollIndicator={false}
       />

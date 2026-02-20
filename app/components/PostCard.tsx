@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, Image, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import React from "react";
+import { Image, Pressable, Text, View } from "react-native";
 
 type Post = {
   id: number;
@@ -11,25 +11,32 @@ type Post = {
   beltColor: string; // 0..1
   description: string;
   tags: string[];
+  isUserPost?: boolean;
 };
 
-export default function PostCard({ post }: { post: Post }) {
-
-const beltColorClass = (() => {
-switch (post.beltColor) {
-    case 'white':
-        return 'bg-gray-300';
-    case 'blue':
-        return 'bg-blue-600';
-    case 'purple':
-        return 'bg-purple-600';
-    case 'brown':
-        return 'bg-yellow-700';
-    case 'black':
-        return 'bg-black';
-    default:
-        return 'bg-gray-300';}
-})();
+export default function PostCard({
+  post,
+  onDelete,
+}: {
+  post: Post;
+  onDelete?: (id: number) => void;
+}) {
+  const beltColorClass = (() => {
+    switch (post.beltColor) {
+      case "white":
+        return "bg-gray-300";
+      case "blue":
+        return "bg-blue-600";
+      case "purple":
+        return "bg-purple-600";
+      case "brown":
+        return "bg-yellow-700";
+      case "black":
+        return "bg-black";
+      default:
+        return "bg-gray-300";
+    }
+  })();
 
   return (
     <View className="w-[92%] self-center bg-white border-2 border-black-500 border-dotted rounded-3xl p-4 my-3">
@@ -49,7 +56,6 @@ switch (post.beltColor) {
               borderRadius: 56,
               borderColor: "black",
               borderWidth: 2,
-              
             }}
           />
         </View>
@@ -66,6 +72,15 @@ switch (post.beltColor) {
           </View>
         </View>
       </View>
+
+      {post.isUserPost && onDelete && (
+        <Pressable
+          onPress={() => onDelete(post.id)}
+          className="bg-red-500 mt-3 px-4 py-2 rounded-lg self-start"
+        >
+          <Text>Delete</Text>
+        </Pressable>
+      )}
 
       {/* Inner gray card */}
       <View className=" bg-gray-200  rounded-3xl p-4">

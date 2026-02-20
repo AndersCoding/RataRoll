@@ -9,7 +9,12 @@ import {
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { IUserPost } from "../interface/IUserPost";
-import { addUserPost, getUserPosts } from "../storage/postsStorage";
+import {
+  addUserPost,
+  deleteUserPost,
+  getUserPosts,
+} from "../storage/postsStorage";
+import yodaimage from "../images/apriloneil.webp";
 
 export default function UserPost() {
   const [userName, setUserName] = useState("");
@@ -32,10 +37,11 @@ export default function UserPost() {
       id: Date.now(),
       user: userName.trim(),
       title: title.trim(),
-      image: "",
+      image: yodaimage,
       beltColor: beltColor.trim().toLowerCase(),
       date: new Date().toISOString(),
       description: description.trim(),
+      isUserPost: true,
       tags: tags
         .split(",")
         .map((t) => t.trim())
@@ -51,6 +57,11 @@ export default function UserPost() {
     setTags("");
     setBeltColor("");
   };
+
+  const handleDelete = async (id: number) => {
+    const next = await deleteUserPost(id);
+    setUploadedPosts(next);
+  }
 
   return (
     <SafeAreaProvider>
@@ -99,7 +110,7 @@ export default function UserPost() {
           <Text>Upload</Text>
         </Pressable>
       </SafeAreaView>
-      <ScrollView>
+      
         <FlatList
           data={uploadedPosts}
           keyExtractor={(item) => item.id.toString()}
@@ -111,7 +122,15 @@ export default function UserPost() {
                 {item.user} • {item.date.slice(0, 10)}
               </Text>
               <Text className="mt-2">{item.description}</Text>
-
+              <Pressable
+                onPress={async () => {
+                  const updated = await deleteUserPost(item.id);
+                  setUploadedPosts(updated);
+                }}
+                className="bg-red-500 mt-3 p-2 rounded-lg items-center"
+              >
+                <Text>Remove post</Text>
+              </Pressable>
               {item.tags.length > 0 && (
                 <Text className="mt-2 text-gray-600">
                   {item.tags.join(", ")}
@@ -125,7 +144,6 @@ export default function UserPost() {
             </Text>
           }
         />
-      </ScrollView>
     </SafeAreaProvider>
   );
 }
