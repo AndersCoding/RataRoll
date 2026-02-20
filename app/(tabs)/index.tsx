@@ -1,12 +1,25 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import DisplayPost from '../components/DisplayPost';
+import React, { useCallback, useState } from "react";
+import { View } from "react-native";
+import { useFocusEffect } from "expo-router";
+import { IUserPost } from "../interface/IUserPost";
+import { getUserPosts } from "../storage/postsStorage";
+import CombinedFeed from "../components/CombinedFeed";
 
 export default function Home() {
+  const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        const saved = await getUserPosts();
+        setUploadedPosts(saved);
+      })();
+    }, [])
+  );
+
   return (
     <View className="flex-1 bg-white">
-      <Text>Here will be displayed users post</Text>
-      <DisplayPost />
+      <CombinedFeed uploadedPosts={uploadedPosts} />
     </View>
   );
 }
