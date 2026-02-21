@@ -15,6 +15,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
           tabBarIcon: ({
             color,
             focused,
@@ -35,6 +37,8 @@ export default function TabLayout() {
         options={{
           title: "Upload workout",
           headerTitleAlign: "center",
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "add-circle" : "add-circle-outline"}
@@ -48,6 +52,8 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ focused }) => (
             <Image
               source={

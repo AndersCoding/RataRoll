@@ -7,6 +7,7 @@ import {
   addUserPost,
   deleteUserPost,
   getUserPosts,
+  getProfileImage
 } from "../storage/postsStorage";
 
 export default function UserPost() {
@@ -15,11 +16,14 @@ export default function UserPost() {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [beltColor, setBeltColor] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
 
   const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
 
   useEffect(() => {
     (async () => {
+      const savedImg = await getProfileImage();
+      setProfileImageUrl(savedImg);
       const saved = await getUserPosts();
       setUploadedPosts(saved);
     })();
@@ -30,7 +34,7 @@ export default function UserPost() {
       id: Math.floor(Date.now() / 60000),
       user: userName.trim(),
       title: title.trim(),
-      image: yodaimage,
+      image: profileImageUrl || yodaimage,
       beltColor: beltColor.trim().toLowerCase(),
       date: new Date().toISOString(),
       description: description.trim(),

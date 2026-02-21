@@ -2,6 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUserPost } from "../interface/IUserPost";
 
 const KEY = "user_posts_v1";
+const imageKEY = "profileImage"
+
+export function getProfileImage(): Promise<string | null> {
+  return AsyncStorage.getItem(imageKEY);
+}
 
 export async function getUserPosts(): Promise<IUserPost[]> {
   const raw = await AsyncStorage.getItem(KEY);
