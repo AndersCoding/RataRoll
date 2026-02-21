@@ -75,16 +75,16 @@ export default function UserPost() {
           <TextInput
             placeholder="Title. Example: ''Destroyer of giants''"
             placeholderTextColor={"gray"}
-            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+            className="flex-1 border-2 border-gray-300 rounded-lg p-2"
             value={title}
             onChangeText={setTitle}
           />
           <TextInput
             placeholder="Belt color"
             placeholderTextColor={"gray"}
-            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+            className="w-24 border-2 border-gray-300 rounded-lg p-2"
             value={beltColor}
-            autoCapitalize="characters"
+            autoCapitalize="none"
             onChangeText={setBeltColor}
           />
         </View>
