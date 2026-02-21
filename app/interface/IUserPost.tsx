@@ -1,8 +1,8 @@
 export interface IUserPost {
-  id: number;
+  id: string;
   user: string;
   title: string;
-  image: string;
+  image: string | { uri: string };
   date: string;
   description: string;
   beltColor: string;

@@ -30,11 +30,13 @@ export default function UserPost() {
   }, []);
 
   const handleUpload = async () => {
+    const min = 1;
+    const max = 1000000;
     const created: IUserPost = {
-      id: Math.floor(Date.now() / 60000),
+      id: String(Math.floor(Math.random() * (max - min + 1)) + min),
       user: userName.trim(),
       title: title.trim(),
-      image: profileImageUrl || yodaimage,
+      image: profileImageUrl ? { uri: profileImageUrl } : yodaimage,
       beltColor: beltColor.trim().toLowerCase(),
       date: new Date().toISOString(),
       description: description.trim(),
