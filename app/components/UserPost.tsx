@@ -3,6 +3,8 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import yodaimage from "../images/apriloneil.webp";
 import { IUserPost } from "../interface/IUserPost";
+import { useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 import {
   addUserPost,
   deleteUserPost,
@@ -20,14 +22,17 @@ export default function UserPost() {
 
   const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      const savedImg = await getProfileImage();
-      setProfileImageUrl(savedImg);
-      const saved = await getUserPosts();
-      setUploadedPosts(saved);
-    })();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        const savedImg = await getProfileImage();
+        setProfileImageUrl(savedImg);
+
+        const savedPosts = await getUserPosts();
+        setUploadedPosts(savedPosts);
+      })();
+    }, [])
+  );
 
   const handleUpload = async () => {
     const min = 1;
@@ -71,7 +76,7 @@ export default function UserPost() {
           value={userName}
           onChangeText={setUserName}
         />
-        <View className="flex-row justify-between w-[90%] gap-4 self-center">
+        <View className="flex-row justify-between w-[90%] mb-4 gap-4 self-center">
           <TextInput
             placeholder="Title. Example: ''Destroyer of giants''"
             placeholderTextColor={"gray"}

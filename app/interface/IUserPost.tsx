@@ -1,5 +1,5 @@
 export interface IUserPost {
-  id: string;
+  id: string ;
   user: string;
   title: string;
   image: string | { uri: string };

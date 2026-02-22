@@ -9,10 +9,15 @@ export default function CombinedFeed({
   onDelete
 }: {
   uploadedPosts: IUserPost[];
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }) {
-  const data: IUserPost[] = [...uploadedPosts, ...(dummyData as IUserPost[])];
-
+const data: IUserPost[] = [
+  ...uploadedPosts.map((post) => ({ ...post, id: String(post.id) })), // Ensure id is a number
+  ...(dummyData as IUserPost[]).map((post) => ({
+    ...post,
+    id: String(post.id),
+  })),
+];
   return (
     <View className="flex-1">
       <FlatList

@@ -2,7 +2,7 @@
 
 const dummyData = [
   {
-    id: 1,
+    id: "1",
     user: "Yoda",
     image: require("../images/yodaProfile.jpeg"),
     title: "First day",
@@ -13,7 +13,7 @@ const dummyData = [
     tags: ["BJJ", "Armbar"],
   },
   {
-    id: 2,
+    id: "2",
     user: "April O'Neil",
     image: require("../images/apriloneil.webp"),
     title: "First week",
@@ -24,7 +24,7 @@ const dummyData = [
     tags: ["BJJ", "Training", "Improvements"],
   },
   {
-    id: 3,
+    id: "3",
     user: "Paul Atreides",
     image: require("../images/paulatreides.webp"),
     title: "First month",

@@ -38,7 +38,7 @@ export default function ImageSelector() {
   const raphaelImage =
     "https://www.denofgeek.com/wp-content/uploads/2023/07/geek-lead-tmnt-BRADYNOON.jpg?fit=1200%2C675";
 
-  const turtleImages = [
+  const userAvatars = [
     {
       id: 1,
       image: leoImage,
@@ -67,20 +67,20 @@ export default function ImageSelector() {
           setModalVisible(!modalVisible);
         }}
       >
-        <View className="flex-1 items-center justify-center bg-black bg-opacity-50">
-          <View className="flex-row justify-between gap-2 self-center bg-white rounded-lg p-6">
+        <View className="flex-1 items-center justify-center bg-black/50">
+          <View className="bg-white rounded-2xl p-6 w-[85%] max-h-[80%]">
             <Text className="text-lg mb-4">Select image</Text>
-            {turtleImages.map((turtle) => (
+            {userAvatars.map((avatar) => (
               <Pressable
-                key={turtle.id}
+                key={avatar.id}
                 onPress={() => {
-                  setImageUrl(turtle.image);
-                  storeImage(turtle.image);
+                  setImageUrl(avatar.image);
+                  storeImage(avatar.image);
                   setModalVisible(!modalVisible);
                 }}
               >
                 <Image
-                  source={{ uri: turtle.image }}
+                  source={{ uri: avatar.image }}
                   className="w-20 h-20 rounded-full mb-4"
                 />
               </Pressable>
@@ -96,17 +96,22 @@ export default function ImageSelector() {
           </View>
         </View>
       </Modal>
-      <View>
-        <Image
-          source={{ uri: imageUrl }}
-          className="w-48 h-48 rounded-full mb-4 self-center justify-center items-center"
-        />
-        <Pressable onPress={() => setModalVisible(true)}>
-          <Text className="text-blue-500">Open Image Selector</Text>
-        </Pressable>
+
+      <View className="flex-1 mt-4 items-center ">
+        <View className="relative">
+          <Image
+            source={{ uri: imageUrl }}
+            className="w-48 h-48 rounded-full  border-2 border-black-300"
+          />
+          <Pressable
+            onPress={() => setModalVisible(true)}
+            className="absolute bottom-2 right-2 bg-blue-500 rounded-full p-2"
+          >
+            <Text className="text-xl">✏️</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 }
 
-export const imageUrl = ImageSelector;

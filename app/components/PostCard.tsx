@@ -3,7 +3,7 @@ import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
 
 type Post = {
-  id: number;
+  id: string;
   user: string;
   image: any;
   title: string;
@@ -19,7 +19,7 @@ export default function PostCard({
   onDelete,
 }: {
   post: Post;
-  onDelete?: (id: number) => void;
+  onDelete?: (id: string) => void;
 }) {
   const beltColorClass = (() => {
     switch (post.beltColor) {

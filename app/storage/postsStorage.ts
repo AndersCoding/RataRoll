@@ -3,6 +3,12 @@ import { IUserPost } from "../interface/IUserPost";
 
 const KEY = "user_posts_v1";
 const imageKEY = "profileImage"
+const backgroundColor = "backgroundColor"
+
+// Background color
+export function changeBackgroundColor(color: string): Promise<void> {
+  return AsyncStorage.setItem(backgroundColor, color);
+}
 
 export function getProfileImage(): Promise<string | null> {
   return AsyncStorage.getItem(imageKEY);
@@ -24,9 +30,9 @@ export async function clearUserPosts() {
   await AsyncStorage.removeItem(KEY);
 }
 
-export async function deleteUserPost(id: number): Promise<IUserPost[]> {
+export async function deleteUserPost(id: string | number): Promise<IUserPost[]> {
   const current = await getUserPosts();
-  const next = current.filter((p) => p.id !== id);
+const next = current.filter((p) => String(p.id) !== String(id));
   await AsyncStorage.setItem(KEY, JSON.stringify(next));
   return next;
 }
