@@ -97,7 +97,7 @@ export default function ImageSelector() {
         </View>
       </Modal>
 
-      <View className="flex-1 mt-4 items-center ">
+      <View className="mt-4 items-center ">
         <View className="relative">
           <Image
             source={{ uri: imageUrl }}
