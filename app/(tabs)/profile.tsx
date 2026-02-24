@@ -6,7 +6,7 @@ import ImageSelector from "../components/modal/ImageSelector";
 export default function Profile() {
 
   const [receivedData, setReceivedData] = useState<string | null>(null);;
-const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
    const handleValueFromChild = (value: string) => {
      setReceivedData(value);
