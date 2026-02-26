@@ -16,7 +16,7 @@ export default function Profile() {
   return (
     <ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
       {/* Header Section */}
-      <View className="items-center mt-8">
+      <View className="items-center mt-14">
         <ImageSelector />
 
         <Text className="text-2xl font-bold mt-4">RataRoll User</Text>

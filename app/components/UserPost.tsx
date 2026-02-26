@@ -68,7 +68,7 @@ export default function UserPost() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="mt-4">
+      <SafeAreaView className="mt-8">
         <TextInput
           placeholder="Username"
           placeholderTextColor={"gray"}

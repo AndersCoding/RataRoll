@@ -18,7 +18,7 @@ export default function SearchField({ value, onChange }: Props) {
           color="gray"
           style={{ position: "absolute", left: 12, top: 8, zIndex: 1 }}
         />
-        ;
+        
         <TextInput
           placeholder="Search by username"
           placeholderTextColor={"gray"}

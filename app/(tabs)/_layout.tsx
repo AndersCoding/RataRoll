@@ -14,7 +14,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          headerShown:false,
+          headerShown: false,
           title: "Home",
           tabBarActiveTintColor: "black",
           tabBarInactiveTintColor: "gray",
@@ -36,6 +36,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="userpost"
         options={{
+          headerShown: false,
           title: "Upload workout",
           headerTitleAlign: "center",
           tabBarActiveTintColor: "black",
@@ -53,6 +54,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
+          headerShown: false,
           tabBarActiveTintColor: "black",
           tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ focused }) => (
