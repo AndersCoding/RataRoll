@@ -10,17 +10,24 @@ type Props = {
 export default function SearchField({ value, onChange }: Props) {
 
   return (
-    <View className="px-4 pt-4">
-      <Text className="mb-2 font-bold">
-        <Entypo name="magnifying-glass" size={24} color="black" />
-      </Text>
-      <TextInput
-        placeholder="Type a name… (e.g. yoda)"
-        value={value}
-        onChangeText={onChange}
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        autoCapitalize="none"
-      />
+    <View className="px-4 pt-4 mt-6">
+      <View className="relative">
+        <Entypo
+          name="magnifying-glass"
+          size={24}
+          color="gray"
+          style={{ position: "absolute", left: 12, top: 8, zIndex: 1 }}
+        />
+        ;
+        <TextInput
+          placeholder="Search by username"
+          placeholderTextColor={"gray"}
+          value={value}
+          onChangeText={onChange}
+          className="border border-gray-300 rounded-full pl-12 pr-4 py-3"
+          autoCapitalize="none"
+        />
+      </View>
     </View>
   );
 }
