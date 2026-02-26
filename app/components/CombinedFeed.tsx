@@ -2,32 +2,31 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import PostCard from "../components/PostCard";
 import { IUserPost } from "../interface/IUserPost";
-import dummyData from "../data/dummyData";
 
 export default function CombinedFeed({
-  uploadedPosts,
-  onDelete
+  data,
+  onDelete,
+  ListHeaderComponent,
 }: {
-  uploadedPosts: IUserPost[];
+  data: IUserPost[];
   onDelete: (id: string) => void;
+  ListHeaderComponent?: React.ReactElement | null;
 }) {
-const data: IUserPost[] = [
-  ...uploadedPosts.map((post) => ({ ...post, id: String(post.id) })), // Ensure id is a number
-  ...(dummyData as IUserPost[]).map((post) => ({
-    ...post,
-    id: String(post.id),
-  })),
-];
   return (
     <View className="flex-1">
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => 
-        <PostCard post={item} 
-        onDelete={item.isUserPost ? onDelete: undefined}
-        />}
+        keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={ListHeaderComponent}
+        stickyHeaderIndices={undefined}
+        renderItem={({ item }) => (
+          <PostCard
+            post={item}
+            onDelete={item.isUserPost ? onDelete : undefined}
+          />
+        )}
         contentContainerStyle={{ paddingVertical: 12 }}
+        keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       />
     </View>

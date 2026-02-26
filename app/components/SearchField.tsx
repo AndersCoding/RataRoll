@@ -1,40 +1,26 @@
-import { View, Text, TextInput } from 'react-native'
-import React, { useMemo, useState } from 'react'
-import dummyData from '../data/dummyData';
-// Component to handle search functionality
+import React from "react";
+import { TextInput, View, Text } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 
-type SearchFieldProps = {
-  searchTerm: string;
+type Props = {
+  value: string;
+  onChange: (text: string) => void;
 };
 
-export default function SearchField({searchTerm}: SearchFieldProps) {
-    const [searchField, setSearchTerm] = useState("");
-
-   const filteredSearch = useMemo(() => {
-     const q = searchField.trim().toLowerCase();
-     if (!q) return dummyData;
-
-     return dummyData.filter((item) =>
-       item.beltColor && item.beltColor.toLowerCase().includes(q)
-     );
-   }, [searchField]);
+export default function SearchField({ value, onChange }: Props) {
 
   return (
-    <View>
-      <Text>SearchField</Text>
+    <View className="px-4 pt-4">
+      <Text className="mb-2 font-bold">
+        <Entypo name="magnifying-glass" size={24} color="black" />
+      </Text>
       <TextInput
-        placeholder="Search by tags..."
-        value={searchField}
-        onChangeText={setSearchTerm}
+        placeholder="Type a name… (e.g. yoda)"
+        value={value}
+        onChangeText={onChange}
         className="border border-gray-300 rounded-md p-2 mb-4"
-        />
-        <View>
-            {filteredSearch.map((item) => (
-                <View key={item.id} className="mb-4">
-                    <Text className="text-lg font-bold">{item.user}</Text>
-            </View>
-            ))}                    
-        </View>
+        autoCapitalize="none"
+      />
     </View>
-  )
+  );
 }
