@@ -12,11 +12,6 @@ export default function Profile() {
      setReceivedData(value);
    };
 
-   //useEffect(() => {
-//
-   //   console.log("Received data from child:", receivedData);
-//
-   //},[])
 
   return (
     <ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
