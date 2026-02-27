@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+![Home Screen](app/images/RatarollLogo.png)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
+# 🥋 RataRoll
+
+
+RataRoll is a React Native mobile application built with Expo.  
+The app allows users to create and share Brazilian Jiu-Jitsu training posts, manage a profile, select avatars, search posts, and toggle dark mode.
+
+Built as a personal project to strengthen Native development skills in React Native and TypeScript.
 
 ## Get started
 
-1. Install dependencies
+ - Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+ - Start app through terminal
 
    ```bash
-   npx expo start
+    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+ - Scan QR-code presented in the terminal on your phone (NOTE! Must have installed Expo-app on device)
+ - For web, press  
 ```bash
-npm run reset-project
-```
+    w
+   ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+ - Open app
+  
+## 🚀 Tech Stack
 
-## Learn more
+ -  **React Native with Expo**
+    
+-   **TypeScript**
+    
+-   **Expo Router**
+    
+-   **AsyncStorage**
+    
+-   **Git / GitHub**
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📱 Features
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+-    📰 Dynamic feed with FlatList
+    
+-   🔍 Search functionality (filter by user name)
+    
+-   👤 Profile page with avatar selection (local + remote images)
+    
+-   🌙 Dark mode toggle (under construction)
+    
+-   💾 Local data persistence using AsyncStorage
+    
+-   🗂 Clean component-based architecture
+    
+-   🎯 Type-safe development with TypeScript
 
-## Join the community
 
-Join our community of developers creating universal apps.
+## 🧰 Prerequisites
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+-   **Node 18+**
+    
+-   **Yarn/PNPM/NPM**
+    
+-   **React Native CLI**  _or_  **Expo CLI**
+    
+-   **Xcode (macOS) for iOS, Android Studio for Android**
+
+## 👨‍💻 **Author**
+*Anders Bellsund Beil  
+Frontend & Mobile Developer  
+React Native | TypeScript | SwiftUI*
