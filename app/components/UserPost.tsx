@@ -128,7 +128,7 @@ export default function UserPost() {
         >
           <Text>Upload</Text>
         </Pressable>
-        <View>
+        <View className="mt-6 w-[90%] justify-center self-center items-center">
           <Text>Current image for user</Text>
           <Image
             source={profileImageUrl ? { uri: profileImageUrl } : {uri: yodaimage}}

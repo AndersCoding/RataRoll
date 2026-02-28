@@ -4,6 +4,12 @@ import { IUserPost } from "../interface/IUserPost";
 const KEY = "user_posts_v1";
 const imageKEY = "profileImage"
 const backgroundColor = "backgroundColor"
+const titleKEY = "profileTitle"
+
+// Profile title
+export function changeProfileTitle(title:string): Promise<void>{
+  return AsyncStorage.setItem(titleKEY, title);
+}
 
 // Background color
 export function changeBackgroundColor(color: string): Promise<void> {

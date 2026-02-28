@@ -1,17 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import ColorButton from "../components/buttons/ColorButton";
 import ImageSelector from "../components/modal/ImageSelector";
+import { changeProfileTitle } from "../storage/postsStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile() {
-
-  const [receivedData, setReceivedData] = useState<string | null>(null);;
+  const [receivedData, setReceivedData] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [title, setTitle] = useState("Enter title:");
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const titleKEY = "profileTitle";
 
-   const handleValueFromChild = (value: string) => {
-     setReceivedData(value);
-   };
 
+  // Set new title and save it to AsyncStorage
+  const handleTitleChange = (newTitle: string) => {
+    setTitle(newTitle);
+    changeProfileTitle(newTitle);
+  };
+
+  const resetTitleField = () => {
+    setTitle("");
+  };
+
+  // Load profile title from AsyncStorage on component mount
+    useEffect(() => {
+      (async () => {
+        try {
+          const title = await AsyncStorage.getItem(titleKEY);
+          if (title) setTitle(title);
+        } catch (e) {
+          console.error("Error loading image", e);
+        }
+      })();
+    }, []);
 
   return (
     <ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
@@ -19,9 +48,37 @@ export default function Profile() {
       <View className="items-center mt-14">
         <ImageSelector />
 
-        <Text className="text-2xl font-bold mt-4">RataRoll User</Text>
+        {/* User name */}
+        <Text
+          style={{ color: isDark ? "#FFFFFF" : "#000000" }}
+          className="text-2xl font-bold mt-4"
+        >
+          RataRoll User
+        </Text>
 
-        <Text className="text-gray-500 mt-1">Blue Belt Explorer</Text>
+        {/* user title */}
+        <View className="flex-row mt-2 space-x-4">
+          <Pressable>
+            {isEditingTitle ? (
+              <TextInput
+                className="border border-gray-300 rounded px-2 py-1 w-48 text-center"
+                value={title}
+                onChangeText={handleTitleChange}
+                onBlur={() => setIsEditingTitle(false)}
+                autoFocus={true}
+              />
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  setIsEditingTitle(true);
+                }}
+                className="flex-row mt-2 space-x-4"
+              >
+                <Text className="text-gray-500">{title}</Text>
+              </TouchableOpacity>
+            )}
+          </Pressable>
+        </View>
       </View>
 
       {/* Divider */}
@@ -31,10 +88,9 @@ export default function Profile() {
       <View className="mt-8 px-6">
         <Text className="text-lg font-semibold mb-4">Appearance</Text>
 
-        <ColorButton onButtonPress={setIsDark}/>
+        <ColorButton onButtonPress={setIsDark} />
         <Text>{receivedData}</Text>
       </View>
     </ScrollView>
   );
 }
-

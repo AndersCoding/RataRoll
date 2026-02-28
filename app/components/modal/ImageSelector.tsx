@@ -48,15 +48,14 @@ export default function ImageSelector() {
   const remyImage = "https://i.redd.it/rbmmfzpa9pz71.png";
   const batDogImage =
     "https://i.redd.it/should-ace-the-batdog-be-in-dcus-batman-movie-v0-rqothx2pfkif1.jpg?width=736&format=pjpg&auto=webp&s=ab159340681464aa9cdc370e78a1e26b83425b13";
-
-    const speedyImage =
-      "https://static.wikia.nocookie.net/samuraipizzacats/images/3/3d/Speedy_Cerviche.png/revision/latest?cb=20141109082424";
-      const shifuImage =
-        "https://static.wikia.nocookie.net/dreamworks/images/5/54/Shifu_Profile.jpg/revision/latest?cb=20240210032942";
-        const georgeImage =
-          "https://www.slashfilm.com/img/gallery/george-costanzas-5-best-jobs-on-seinfeld-ranked/intro-1734029193.jpg";
-          const usagiImage =
-            "https://static.wikia.nocookie.net/usagistudios/images/0/0d/Usagi_infobox.jpg/revision/latest?cb=20200506164339";
+  const speedyImage =
+    "https://static.wikia.nocookie.net/samuraipizzacats/images/3/3d/Speedy_Cerviche.png/revision/latest?cb=20141109082424";
+  const shifuImage =
+    "https://static.wikia.nocookie.net/dreamworks/images/5/54/Shifu_Profile.jpg/revision/latest?cb=20240210032942";
+  const georgeImage =
+    "https://www.slashfilm.com/img/gallery/george-costanzas-5-best-jobs-on-seinfeld-ranked/intro-1734029193.jpg";
+  const usagiImage =
+    "https://static.wikia.nocookie.net/usagistudios/images/0/0d/Usagi_infobox.jpg/revision/latest?cb=20200506164339";
 
   const userAvatars = [
     {
@@ -107,7 +106,6 @@ export default function ImageSelector() {
       id: 12,
       image: usagiImage,
     },
-
   ];
 
   return (
