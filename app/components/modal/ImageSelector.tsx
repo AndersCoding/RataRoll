@@ -4,6 +4,11 @@ import { Image, Modal, Pressable, Text, View } from "react-native";
 
 // Component to select an image for users profile picture.
 
+type ImageSelectorProps = {
+  imageUrl: string | null;
+  setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
 export default function ImageSelector() {
   const [modalVisible, setModalVisible] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -115,3 +120,4 @@ export default function ImageSelector() {
   );
 }
 
+export type ImageSelectorType = ReturnType<typeof ImageSelector>;

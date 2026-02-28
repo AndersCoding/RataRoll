@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View, Image } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import yodaimage from "../images/apriloneil.webp";
 import { IUserPost } from "../interface/IUserPost";
@@ -11,6 +11,9 @@ import {
   getUserPosts,
   getProfileImage
 } from "../storage/postsStorage";
+
+import ImageSelector from "./modal/ImageSelector";
+
 
 export default function UserPost() {
   const [userName, setUserName] = useState("");
@@ -66,6 +69,14 @@ export default function UserPost() {
     setUploadedPosts(next);
   };
 
+  useEffect(() => {
+    return () => {
+      setProfileImageUrl(getProfileImage() as unknown as string);
+      //profileImageUrl;
+      //getProfileImage();
+    };
+  }, []);
+
   return (
     <SafeAreaProvider>
       <SafeAreaView className="mt-8">
@@ -117,6 +128,13 @@ export default function UserPost() {
         >
           <Text>Upload</Text>
         </Pressable>
+        <View>
+          <Text>Current image for user</Text>
+          <Image
+            source={profileImageUrl ? { uri: profileImageUrl } : {uri: yodaimage}}
+            className="w-20 h-20 rounded-full"
+          />
+        </View>
       </SafeAreaView>
 
       <View>
