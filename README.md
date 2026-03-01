@@ -1,6 +1,6 @@
-<img src="app/images/RatarollLogo.png" width="40%" />
+<img src="app/images/RatarollLogo.png" width="20%" />
 
-![Home Screen](app/images/RatarollLogo.png)
+<-- ![Home Screen](app/images/RatarollLogo.png) -->
 
 ## 🎥 Demo
 https://github.com/user-attachments/assets/40159f4e-48e5-43a4-b51d-e18c3226f56f
