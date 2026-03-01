@@ -49,7 +49,9 @@ export default function Profile() {
 
   return (
     //<ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
-      <ScrollView className={isDarkMode ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
+    <ScrollView
+      className={isDarkMode ? "flex-1 bg-gray-900" : "flex-1 bg-white"}
+    >
       {/* Header Section */}
       <View className="items-center mt-14">
         <ImageSelector />
@@ -57,13 +59,17 @@ export default function Profile() {
         {/* User name */}
         <Text
           //style={{ color: isDark ? "#FFFFFF" : "#000000" }}
-          className="text-2xl font-bold mt-4"
+          className={
+            isDarkMode
+              ? "text-white text-2xl font-bold mt-4"
+              : "text-black text-2xl font-bold mt-4"
+          }
         >
           RataRoll User
         </Text>
 
         {/* user title */}
-        <View className="flex-row mt-2 space-x-4">
+        <View className="flex-row space-x-4">
           <Pressable>
             {isEditingTitle ? (
               <TextInput
@@ -92,7 +98,15 @@ export default function Profile() {
 
       {/* Settings Section */}
       <View className="mt-8 px-6">
-        <Text className="text-lg font-semibold mb-4">Appearance</Text>
+        <Text
+          className={
+            isDarkMode
+              ? "text-white text-lg font-semibold mb-4"
+              : "text-black text-lg font-semibold mb-4"
+          }
+        >
+          Appearance
+        </Text>
 
         <ColorButton onButtonPress={toggleTheme} />
         <Text>{receivedData}</Text>

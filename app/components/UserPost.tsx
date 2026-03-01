@@ -13,7 +13,7 @@ import {
 } from "../storage/postsStorage";
 
 import ImageSelector from "./modal/ImageSelector";
-
+import { useTheme } from "./colors/ThemeContext";
 
 export default function UserPost() {
   const [userName, setUserName] = useState("");
@@ -24,6 +24,10 @@ export default function UserPost() {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
 
   const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
+
+
+  const {theme, toggleTheme} = useTheme();
+  const isDarkMode = theme === "dark";
 
   useFocusEffect(
     useCallback(() => {
@@ -84,6 +88,7 @@ export default function UserPost() {
           placeholder="Username"
           placeholderTextColor={"gray"}
           className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+          style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
           value={userName}
           onChangeText={setUserName}
         />
@@ -92,6 +97,7 @@ export default function UserPost() {
             placeholder="Title. Example: ''Destroyer of giants''"
             placeholderTextColor={"gray"}
             className="flex-1 border-2 border-gray-300 rounded-lg p-2"
+            style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
             value={title}
             onChangeText={setTitle}
           />
@@ -99,6 +105,7 @@ export default function UserPost() {
             placeholder="Belt color"
             placeholderTextColor={"gray"}
             className="w-24 border-2 border-gray-300 rounded-lg p-2"
+            style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
             value={beltColor}
             autoCapitalize="none"
             onChangeText={setBeltColor}
@@ -111,6 +118,7 @@ export default function UserPost() {
           placeholder="Description"
           placeholderTextColor={"gray"}
           className="border-2 border-gray-300 rounded-lg p-2 mb-4 h-48 w-[90%] self-center"
+          style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
           value={description}
           onChangeText={setDescription}
         />
@@ -119,20 +127,27 @@ export default function UserPost() {
           placeholder="Tags (comma separated)"
           placeholderTextColor={"gray"}
           className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
+          style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
           value={tags}
           onChangeText={setTags}
         />
         <Pressable
           onPress={handleUpload}
-          className="bg-orange-500 rounded-lg p-3 w-[90%] self-center items-center"
+          className="rounded-lg p-3 w-[90%] self-center items-center"
+          style={{ backgroundColor: isDarkMode ? "#04879C" : "#F39422" }}
         >
-          <Text>Upload</Text>
+          <Text className="font-semibold">Upload</Text>
         </Pressable>
         <View className="mt-6 w-[90%] justify-center self-center items-center">
-          <Text>Current image for user</Text>
+          <Text className={isDarkMode ? "text-gray-400" : "text-gray-900"}>
+            Current image
+          </Text>
           <Image
-            source={profileImageUrl ? { uri: profileImageUrl } : {uri: yodaimage}}
-            className="w-20 h-20 rounded-full"
+            source={
+              profileImageUrl ? { uri: profileImageUrl } : { uri: yodaimage }
+            }
+            className="w-20 h-20 rounded-full border-2  mt-2"
+            style={{ borderColor: isDarkMode ? "#04879C" : "#04879C" }}
           />
         </View>
       </SafeAreaView>

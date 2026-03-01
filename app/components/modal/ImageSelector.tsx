@@ -14,6 +14,9 @@ export default function ImageSelector() {
   const [modalVisible, setModalVisible] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
+  const {theme, toggleTheme} = useTheme();
+  const isDarkMode = theme === "dark";
+
   const KEY = "profileImage";
 
   useEffect(() => {
@@ -120,8 +123,19 @@ export default function ImageSelector() {
         }}
       >
         <View className="flex-1 items-center justify-center bg-black/50">
-          <View className="bg-white rounded-2xl p-6 w-[85%] max-h-[80%]">
-            <Text className="text-lg mb-4">Select image</Text>
+          <View
+            className="rounded-2xl p-6 w-[85%] max-h-[80%]"
+            style={{ backgroundColor: isDarkMode ? "#1F2937" : "#FFFFFF" }}
+          >
+            <Text
+              className={
+                isDarkMode
+                  ? "text-white text-lg mb-4"
+                  : "text-black text-lg mb-4"
+              }
+            >
+              Select image
+            </Text>
             <FlatList
               data={userAvatars}
               keyExtractor={(item) => item.id.toString()}
@@ -138,7 +152,7 @@ export default function ImageSelector() {
                 >
                   <Image
                     source={{ uri: item.image }}
-                    className="w-20 h-20 rounded-full mb-4"
+                    className={isDarkMode ? "w-20 h-20 border-2 border-gray-400 rounded-full mb-4" : "w-20 h-20 border-2 border-black-300 rounded-full mb-4"}
                   />
                 </Pressable>
               )}
@@ -160,13 +174,18 @@ export default function ImageSelector() {
         <View className="relative">
           <Image
             source={{ uri: imageUrl }}
-            className="w-48 h-48 rounded-full  border-2 border-black-300"
+            className={
+              isDarkMode
+                ? "w-48 h-48 rounded-full border-2 border-gray-400"
+                : "w-48 h-48 rounded-full border-2 border-black-300"
+            }
           />
           <Pressable
             onPress={() => setModalVisible(true)}
-            className="absolute bottom-2 right-2 bg-blue-500 rounded-full p-2"
+            className="absolute bottom-2 right-2 rounded-full p-2"
+            style={{ backgroundColor: isDarkMode ? "#EBF4F6" : "#088395" }}
           >
-            <Text className="text-xl">✏️</Text>
+            <Text className="">✏️</Text>
           </Pressable>
         </View>
       </View>

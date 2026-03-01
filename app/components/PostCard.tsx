@@ -43,11 +43,17 @@ export default function PostCard({
   const isDarkMode = theme === "dark";
 
   return (
-    <View className="w-[92%] self-center bg-white border-2 border-black-500 border-dotted rounded-3xl p-4 my-3">
+    <View
+      className={
+        isDarkMode
+          ? "w-[92%] self-center bg-gray-800 border-2 border-gray-200 border-solid rounded-3xl p-4 my-3"
+          : "w-[92%] self-center bg-white border-2 border-gray-200 border-solid rounded-3xl p-4 my-3"
+      }
+    >
       {/* Top row: avatar + name + progress */}
       <View className="flex-row items-center">
         {/* Image View */}
-        <View className="w-28 h-28 mb  bg-white overflow-hidden relative">
+        <View className="w-28 h-28 mb overflow-hidden relative">
           <Image
             source={post.image}
             resizeMode="cover"
@@ -58,14 +64,23 @@ export default function PostCard({
               width: 72,
               height: 72,
               borderRadius: 56,
-              borderColor: "black",
+              borderColor: isDarkMode ? "white" : "black",
               borderWidth: 2,
             }}
           />
         </View>
 
         <View className="flex-1">
-          <Text className="text-xl font-extrabold">{post.user}</Text>
+          <Text
+            //style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
+            className={
+              isDarkMode
+                ? "text-gray-200 text-xl font-extrabold"
+                : "text-black text-xl font-extrabold"
+            }
+          >
+            {post.user}
+          </Text>
 
           {/* BeltColor bar */}
           <View className="mt-2 h-3 w-48 bg-gray-200 rounded-full overflow-hidden relative">
@@ -86,20 +101,36 @@ export default function PostCard({
       </View>
 
       {/* Inner gray card */}
-      <View className=" bg-gray-200  rounded-3xl p-4">
+      <View
+        className={
+          isDarkMode
+            ? "bg-gray-600  rounded-3xl p-4"
+            : "bg-gray-200  rounded-3xl p-4"
+        }
+      >
         {/* Title + date */}
         <View className="flex-row items-start justify-between">
-          <Text className="text-2xl font-extrabold flex-1 pr-2">
+          <Text
+            className={
+              isDarkMode
+                ? " text-gray-200 text-2xl font-extrabold flex-1 pr-2"
+                : "text-black text-2xl font-extrabold flex-1 pr-2"
+            }
+          >
             {post.title}
           </Text>
-          <Text className="text-lg">
+          <Text
+            className={
+              isDarkMode ? "text-gray-200 text-lg" : "text-black text-lg"
+            }
+          >
             {post.isUserPost
               ? new Date(post.date).toLocaleDateString("no-NO")
               : post.date}
           </Text>
         </View>
 
-        {/* Icons row */}
+        {/* Icons row - NOT IMPLEMENTED
         <View className="flex-row mt-3">
           <Pressable className="mr-4">
             <Feather name="thumbs-up" size={24} color="black" />
@@ -108,9 +139,18 @@ export default function PostCard({
             <Feather name="message-circle" size={24} color="black" />
           </Pressable>
         </View>
+        */}
 
         {/* Description */}
-        <Text className="mt-3 text-base leading-5">{post.description}</Text>
+        <Text
+          className={
+            isDarkMode
+              ? "mt-3 text-base text-gray-200 leading-5"
+              : "mt-3 text-base text black leading-5"
+          }
+        >
+          {post.description}
+        </Text>
 
         {/* Tags */}
         <View className="flex-row flex-wrap mt-4">
