@@ -73,6 +73,15 @@ export default function UserPost() {
     setUploadedPosts(next);
   };
 
+  const userUpload= () => {
+    if (!userName || !title || !description || !beltColor) {
+      alert("Please fill in all required fields: Username, Title, Description, and Belt color.");
+      return;
+    } else {
+      handleUpload();
+    }
+  }
+
   useEffect(() => {
     return () => {
       setProfileImageUrl(getProfileImage() as unknown as string);
@@ -132,7 +141,7 @@ export default function UserPost() {
           onChangeText={setTags}
         />
         <Pressable
-          onPress={handleUpload}
+          onPress={userUpload}
           className="rounded-lg p-3 w-[90%] self-center items-center"
           style={{ backgroundColor: isDarkMode ? "#04879C" : "#F39422" }}
         >
