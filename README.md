@@ -1,6 +1,10 @@
 ![Home Screen](app/images/RatarollLogo.png)
 
 
+
+https://github.com/user-attachments/assets/40159f4e-48e5-43a4-b51d-e18c3226f56f
+
+
 # 🥋 RataRoll
 
 
@@ -73,4 +77,4 @@ Built as a personal project to strengthen Native development skills in React Nat
 ## 👨‍💻 **Author**
 *Anders Bellsund Beil  
 Frontend & Mobile Developer  
-React Native | TypeScript | SwiftUI*
+React Native | TypeScript | Expo*
