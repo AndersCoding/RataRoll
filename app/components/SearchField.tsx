@@ -14,7 +14,7 @@ export default function SearchField({ value, onChange }: Props) {
   const isDarkMode = theme === "dark";
 
   return (
-    <View className="px-4 pt-4 mt-6">
+    <View className="px-4 pt-4 mt-12">
       <View className="relative">
         <Entypo
           name="magnifying-glass"
