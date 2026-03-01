@@ -4,7 +4,7 @@
     "slug": "RataRoll",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/RatarollLogo.png",
     "scheme": "rataroll",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
