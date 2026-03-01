@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="app/images/RatarollLogo.png" width="20%" />
+  <img src="app/images/RatarollLogo.png" width="40%" />
 </p>
 
 # 🥋 RataRoll
