@@ -11,12 +11,17 @@ import ColorButton from "../components/buttons/ColorButton";
 import ImageSelector from "../components/modal/ImageSelector";
 import { changeProfileTitle } from "../storage/postsStorage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTheme } from "../components/colors/ThemeContext";
 
 export default function Profile() {
   const [receivedData, setReceivedData] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
+  // const [isDark, setIsDark] = useState(false);
   const [title, setTitle] = useState("Enter title:");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+
+  const {theme, toggleTheme} = useTheme();
+  const isDarkMode = theme === "dark";
+
   const titleKEY = "profileTitle";
 
 
@@ -43,14 +48,15 @@ export default function Profile() {
     }, []);
 
   return (
-    <ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
+    //<ScrollView className={isDark ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
+      <ScrollView className={isDarkMode ? "flex-1 bg-gray-900" : "flex-1 bg-white"}>
       {/* Header Section */}
       <View className="items-center mt-14">
         <ImageSelector />
 
         {/* User name */}
         <Text
-          style={{ color: isDark ? "#FFFFFF" : "#000000" }}
+          //style={{ color: isDark ? "#FFFFFF" : "#000000" }}
           className="text-2xl font-bold mt-4"
         >
           RataRoll User
@@ -88,7 +94,7 @@ export default function Profile() {
       <View className="mt-8 px-6">
         <Text className="text-lg font-semibold mb-4">Appearance</Text>
 
-        <ColorButton onButtonPress={setIsDark} />
+        <ColorButton onButtonPress={toggleTheme} />
         <Text>{receivedData}</Text>
       </View>
     </ScrollView>

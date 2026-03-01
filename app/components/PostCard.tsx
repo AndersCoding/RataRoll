@@ -1,6 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
+import { useTheme } from "./colors/ThemeContext";
 
 type Post = {
   id: string;
@@ -37,6 +38,9 @@ export default function PostCard({
         return "bg-gray-300";
     }
   })();
+
+  const {theme, toggleTheme} = useTheme();
+  const isDarkMode = theme === "dark";
 
   return (
     <View className="w-[92%] self-center bg-white border-2 border-black-500 border-dotted rounded-3xl p-4 my-3">

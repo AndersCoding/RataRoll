@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, Modal, Pressable, Text, View } from "react-native";
+import { useTheme } from "../colors/ThemeContext";
 
 // Component to select an image for users profile picture.
 
