@@ -1,7 +1,7 @@
 ![Home Screen](app/images/RatarollLogo.png)
+<img src="app/images/RataRollLogo.png" alt="RataRoll Logo" height="30" width="30">
 
-
-
+## 🎥 Demo
 https://github.com/user-attachments/assets/40159f4e-48e5-43a4-b51d-e18c3226f56f
 
 
