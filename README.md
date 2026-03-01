@@ -72,9 +72,10 @@ https://github.com/user-attachments/assets/40159f4e-48e5-43a4-b51d-e18c3226f56f
    ```
 
  - Scan QR-code presented in the terminal on your phone (NOTE! Must have installed Expo-app on device)
- - For web, press  
-```bash
-    w
+ - For web, press
+   
+   ```bash
+     w
    ```
 
  - Open app
