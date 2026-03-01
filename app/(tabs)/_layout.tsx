@@ -4,19 +4,33 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import turtleIcon_blank from "../images/icons/TurtleIcon-blank.png";
 import turtleIcon_filled from "../images/icons/TurtleIcon-filled.png";
+import { useTheme } from '../components/colors/ThemeContext';
 
 //const turtleIcon_blank = "../images/icons/TurtleIcon-blank.png";
 //const turtleIcon_filled = "../images/icons/TurtleIcon-filled.png";
 
 export default function TabLayout() {
+
+  const { theme, toggleTheme } = useTheme();
+  const isDarkMode = theme === "dark";
+
   return (
-    <Tabs>
+    <Tabs
+    screenOptions={{
+      tabBarStyle: {
+        backgroundColor: isDarkMode ? "#1f2937" : "#ffffff",
+        borderTopColor: isDarkMode ? "#374151" : "#e0e0e0",
+        borderTopWidth: 1,
+        height: 60,
+      },
+    }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           headerShown: false,
           title: "Home",
-          tabBarActiveTintColor: "black",
+          tabBarActiveTintColor: "lightgray",
           tabBarInactiveTintColor: "gray",
           tabBarIcon: ({
             color,
@@ -27,7 +41,7 @@ export default function TabLayout() {
           }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
-              color={focused ? "black" : "gray"}
+              color={ isDarkMode ? "gray" : "gray"}
               size={24}
             />
           ),
@@ -39,12 +53,12 @@ export default function TabLayout() {
           headerShown: false,
           title: "Upload workout",
           headerTitleAlign: "center",
-          tabBarActiveTintColor: "black",
+          tabBarActiveTintColor: "lightgray",
           tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "add-circle" : "add-circle-outline"}
-              color={focused ? "black" : "gray"}
+              color={focused ? "gray" : "gray"}
               size={24}
             />
           ),
@@ -55,7 +69,7 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           headerShown: false,
-          tabBarActiveTintColor: "black",
+          tabBarActiveTintColor: "lightgray",
           tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ focused }) => (
             <Image
