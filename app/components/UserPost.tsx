@@ -11,6 +11,7 @@ import {
   getUserPosts,
   getProfileImage
 } from "../storage/postsStorage";
+import { getUserTitle } from "../storage/postsStorage";
 
 import ImageSelector from "./modal/ImageSelector";
 import { useTheme } from "./colors/ThemeContext";
@@ -24,6 +25,7 @@ export default function UserPost() {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
 
   const [uploadedPosts, setUploadedPosts] = useState<IUserPost[]>([]);
+  const [userTitle, setUserTitle] = useState<string | null>(null);
 
 
   const {theme, toggleTheme} = useTheme();
@@ -33,6 +35,8 @@ export default function UserPost() {
     useCallback(() => {
       (async () => {
         const savedImg = await getProfileImage();
+        const userTitle = await getUserTitle();
+        setUserTitle(userTitle);
         setProfileImageUrl(savedImg);
 
         const savedPosts = await getUserPosts();
@@ -93,14 +97,27 @@ export default function UserPost() {
   return (
     <SafeAreaProvider>
       <SafeAreaView className="mt-8">
-        <TextInput
-          placeholder="Username"
-          placeholderTextColor={"gray"}
-          className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-[90%] self-center"
-          style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
-          value={userName}
-          onChangeText={setUserName}
-        />
+        <View className="mt-6 w-[90%] self-center flex-row items-center gap-3">
+          <Image
+            source={
+              profileImageUrl ? { uri: profileImageUrl } : { uri: yodaimage }
+            }
+            className="w-20 h-20 rounded-full border-2 mb-6"
+            style={{ borderColor: isDarkMode ? "#04879C" : "#04879C" }}
+          />
+          <View className="flex-1">
+            <TextInput
+              placeholder="Username"
+              placeholderTextColor={"gray"}
+              className="border-2 border-gray-300 rounded-lg px-3 py-2"
+              style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
+              value={userName}
+              onChangeText={setUserName}
+            />
+            <Text className="text-gray-400 mt-1 left-3">{userTitle}</Text>
+          </View>
+        </View>
+
         <View className="flex-row justify-between w-[90%] mb-4 gap-4 self-center">
           <TextInput
             placeholder="Title. Example: ''Destroyer of giants''"
@@ -147,18 +164,6 @@ export default function UserPost() {
         >
           <Text className="font-semibold">Upload</Text>
         </Pressable>
-        <View className="mt-6 w-[90%] justify-center self-center items-center">
-          <Text className={isDarkMode ? "text-gray-400" : "text-gray-900"}>
-            Current image
-          </Text>
-          <Image
-            source={
-              profileImageUrl ? { uri: profileImageUrl } : { uri: yodaimage }
-            }
-            className="w-20 h-20 rounded-full border-2  mt-2"
-            style={{ borderColor: isDarkMode ? "#04879C" : "#04879C" }}
-          />
-        </View>
       </SafeAreaView>
 
       <View>

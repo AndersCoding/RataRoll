@@ -11,6 +11,10 @@ export function changeProfileTitle(title:string): Promise<void>{
   return AsyncStorage.setItem(titleKEY, title);
 }
 
+export function getUserTitle(): Promise<string | null> {
+  return AsyncStorage.getItem(titleKEY);
+}
+
 // Background color
 export function changeBackgroundColor(color: string): Promise<void> {
   return AsyncStorage.setItem(backgroundColor, color);
