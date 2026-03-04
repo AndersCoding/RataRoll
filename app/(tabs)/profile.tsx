@@ -12,17 +12,22 @@ import ImageSelector from "../components/modal/ImageSelector";
 import { changeProfileTitle } from "../storage/postsStorage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from "../components/colors/ThemeContext";
+import { changeUserName } from "../storage/postsStorage";
 
 export default function Profile() {
   const [receivedData, setReceivedData] = useState<string | null>(null);
   // const [isDark, setIsDark] = useState(false);
   const [title, setTitle] = useState("Enter title:");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isEditingUserName, setIsEditingUserName] = useState(false);
+  const [userName, setUserName] = useState("RataRoll User");
+
 
   const {theme, toggleTheme} = useTheme();
   const isDarkMode = theme === "dark";
 
   const titleKEY = "profileTitle";
+  const userNameKey = "userName";
 
 
   // Set new title and save it to AsyncStorage
@@ -30,6 +35,11 @@ export default function Profile() {
     setTitle(newTitle);
     changeProfileTitle(newTitle);
   };
+
+  const editUserName = (newName: string) => {
+    setUserName(newName);
+    changeUserName(newName);
+  }
 
   const resetTitleField = () => {
     setTitle("");
@@ -40,6 +50,8 @@ export default function Profile() {
       (async () => {
         try {
           const title = await AsyncStorage.getItem(titleKEY);
+          const name = await AsyncStorage.getItem(userNameKey);
+          setUserName(name || "RataRoll User");
           if (title) setTitle(title);
         } catch (e) {
           console.error("Error loading image", e);
@@ -57,16 +69,34 @@ export default function Profile() {
         <ImageSelector />
 
         {/* User name */}
-        <Text
-          //style={{ color: isDark ? "#FFFFFF" : "#000000" }}
-          className={
-            isDarkMode
-              ? "text-white text-2xl font-bold mt-4"
-              : "text-black text-2xl font-bold mt-4"
-          }
-        >
-          RataRoll User
-        </Text>
+        <Pressable>
+          {isEditingUserName ? (
+            <TextInput
+              className="border border-gray-300 rounded px-2 py-1 w-48 text-2xl text-center"
+              value={userName}
+              onChangeText={editUserName}
+              onBlur={() => setIsEditingUserName(false)}
+              autoFocus={true}
+            />
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                setIsEditingUserName(true);
+              }}
+              className="flex-row mt-2 space-x-4"
+            >
+              <Text
+                className={
+                  isDarkMode
+                    ? "text-white text-2xl font-bold mt-4"
+                    : "text-black text-2xl font-bold mt-4"
+                }
+              >
+                {userName}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </Pressable>
 
         {/* user title */}
         <View className="flex-row space-x-4">
@@ -114,3 +144,4 @@ export default function Profile() {
     </ScrollView>
   );
 }
+     

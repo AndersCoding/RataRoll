@@ -5,10 +5,19 @@ const KEY = "user_posts_v1";
 const imageKEY = "profileImage"
 const backgroundColor = "backgroundColor"
 const titleKEY = "profileTitle"
+const userName = "userName"
+
+export function changeUserName(name: string):Promise<void>{
+  return AsyncStorage.setItem(userName, name);
+}
 
 // Profile title
 export function changeProfileTitle(title:string): Promise<void>{
   return AsyncStorage.setItem(titleKEY, title);
+}
+
+export function getUserName(): Promise<string | null> {
+  return AsyncStorage.getItem(userName);
 }
 
 export function getUserTitle(): Promise<string | null> {
