@@ -12,6 +12,7 @@ import {
   getProfileImage
 } from "../storage/postsStorage";
 import { getUserTitle } from "../storage/postsStorage";
+import { getUserName } from "../storage/postsStorage";
 
 import ImageSelector from "./modal/ImageSelector";
 import { useTheme } from "./colors/ThemeContext";
@@ -36,6 +37,8 @@ export default function UserPost() {
       (async () => {
         const savedImg = await getProfileImage();
         const userTitle = await getUserTitle();
+        const userName = await getUserName();
+        setUserName(userName || "RataRoll User");
         setUserTitle(userTitle);
         setProfileImageUrl(savedImg);
 
@@ -65,7 +68,7 @@ export default function UserPost() {
 
     const next = await addUserPost(created);
     setUploadedPosts(next);
-    setUserName("");
+    setUserName(userName);
     setTitle("");
     setDescription("");
     setTags("");
@@ -106,6 +109,17 @@ export default function UserPost() {
             style={{ borderColor: isDarkMode ? "#04879C" : "#04879C" }}
           />
           <View className="flex-1">
+            <Text
+              className={
+                isDarkMode
+                  ? "text-white text-2xl font-bold mt-4"
+                  : "text-black text-2xl font-bold mt-4"
+              }
+              style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}
+            >
+              {userName}
+            </Text>
+            {/* 
             <TextInput
               placeholder="Username"
               placeholderTextColor={"gray"}
@@ -114,7 +128,8 @@ export default function UserPost() {
               value={userName}
               onChangeText={setUserName}
             />
-            <Text className="text-gray-400 mt-1 left-3">{userTitle}</Text>
+            */}
+            <Text className="text-gray-400 mt-1">{userTitle}</Text>
           </View>
         </View>
 
